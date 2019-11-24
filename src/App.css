@@ -1,24 +1,28 @@
-.App {
-  text-align: center;
+/* globals */
+body{
+  font-family: cabin, sans-serif;
+}
+
+h1{
   font-family: damion, sans-serif;
-  /* font-family: cabin, sans-serif; */
 }
 
-.App-logo {
-  height: 40vmin;
+/* navbar */
+.navbar{
+  background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+  height: 4rem;
+  color: #fff;
+  text-shadow: 2px 2px 2px #000;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.navbar h1{
+  font-size: 3rem;
+  margin-top: 0;
+  text-align: center;
+  line-height: 1;
 }
 
-.App-link {
-  color: #09d3ac;
+.navbar a{
+  text-decoration: none;
+  color: #fff;
 }
