@@ -23,12 +23,13 @@ export default function Navbar() {
                 {/* <Link to="/stash"><h1>myStash</h1></Link> : */}
                 <Link to="/login"><h1>myStash</h1></Link>
                 {/* } */}
-                <form className={classes.root} noValidate autoComplete="off">
+                <Link to="/patterns"><h2>All Patterns</h2></Link>
+                {/* <form className={classes.root} noValidate autoComplete="off">
                 <InputBase 
                 id="search" 
                 className={classes.margin}
                 defaultValue="Search Patterns" />
-                </form>
+                </form> */}
             </div>
         );
 }
