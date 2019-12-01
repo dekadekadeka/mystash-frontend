@@ -33,3 +33,31 @@ h1{
   text-shadow: 2px 2px 2px #000;
   font-weight: bold !important;
 }
+/* stash */
+.stash-grid{
+  margin: 1rem 2rem 1rem 2rem;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 1rem 1rem;
+  justify-content: space-evenly;
+}
+
+@media only screen and (min-width: 600px) {
+  .stash-grid{
+    margin: 1rem 2rem 1rem 2rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem 1rem;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (min-width: 768px){
+  .stash-grid{
+    margin: 1rem 0 1rem 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 1rem 1rem;
+    justify-content: space-evenly;
+  }
+}
