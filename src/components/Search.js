@@ -1,31 +1,23 @@
 import React, { useState } from 'react';
+import TextField from '@material-ui/core/TextField';
 
 const Search = (props) => {
     const [searchValue, setSearchValue] = useState("");
 
     const handleChange = (e) => {
-        setSearchValue(e.target.value);
+        props.search(e)
+        setSearchValue(e);
     }
-
-    const resetInputField = () => {
-        setSearchValue("")
-    }
-
-    const callSearchFunction = (e) => {
-        e.preventDefault();
-        props.search(searchValue);
-        resetInputField();
-    }
-
-
+    
     return (
-        <form className="search">
-        <input
-          value={searchValue}
-          onChange={handleChange}
-          type="text"
-        />
-        <input onClick={callSearchFunction} type="submit" value="SEARCH" />
+        <form noValidate autoComplete="off"
+        style={{'textAlign': 'center'}}>
+            <TextField
+                id="pattern-search"
+                label="Search Patterns Here"
+                value={searchValue}
+                onChange={e => handleChange(e.target.value)}
+            />
       </form>
     );
 }

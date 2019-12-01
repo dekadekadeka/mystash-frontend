@@ -30,10 +30,6 @@ h1{
   font-weight: bold;
 }
 
-.MuiInputBase-input{
-  text-shadow: 2px 2px 2px #000;
-  font-weight: bold !important;
-}
 /* stash */
 .stash-grid{
   margin: 1rem 2rem 1rem 2rem;

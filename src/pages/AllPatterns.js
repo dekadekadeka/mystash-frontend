@@ -5,10 +5,9 @@ import Search from '../components/Search'
 const PATTERNS_URL = "http://localhost:3000/patterns"
 
 const Patterns = () => {
-    const [loading, setLoading] = useState(true);
+    const [baseline, setBaseline] = useState(true);
     const [patterns, setPatterns] = useState([]);
     const [filteredPatterns, setFilteredPatterns] = useState([])
-    // const [errorMessage, setErrorMessage] = useState(null);
 
     useEffect(() => {
         fetch(PATTERNS_URL)
@@ -16,40 +15,37 @@ const Patterns = () => {
         .then(data => {
             setPatterns(data);
             setFilteredPatterns(data);
-            setLoading(false);
+            setBaseline(false);
         })
     }, [])
 
     const search = searchValue => {
-        setLoading(true);
-        // setErrorMessage(null);
+        setBaseline(true);
 
         let searchResults = patterns;
 
         if(searchValue){
-            console.log(searchValue, "is going", searchResults)
             searchResults = searchResults.filter(p => 
                 p.brand.toLowerCase().includes(searchValue.toLowerCase()) || 
                 p.number.includes(searchValue))
-                setLoading(false);
-                console.log(searchResults)
+                setBaseline(false);
                 setFilteredPatterns(searchResults);
-            } 
-            else {
-                console.log(searchValue, "is not going")
-                setLoading(false)
             }
         };
 
     return (
         <div>
             <Search search={search}/>
-            {patterns.length === 0 ? 
+            {filteredPatterns.length === 0 ? 
             <h2>No patterns have matched your search!</h2> :
                 <div className="stash-grid">
-                {filteredPatterns.map((pattern) => (
+                {baseline ? 
+                (patterns.map((pattern) => (
+                    <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />))
+                ) : 
+                (filteredPatterns.map((pattern) => (
                 <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />))
-                }
+                )}
                 </div>
             }
         </div>

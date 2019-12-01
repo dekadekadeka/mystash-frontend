@@ -43,7 +43,7 @@ const Pattern = ({pattern}) => {
           View Full
         </Button>
         <Button size="small" color="primary">
-          Edit
+          Add
         </Button>
         <DeleteButton size="small" color="primary" className={DeleteButton.root}>
           Delete
