@@ -7,6 +7,10 @@ h1{
   font-family: damion, sans-serif;
 }
 
+.form-margin{
+  margin: 1.5rem;
+}
+
 /* navbar */
 .navbar{
   background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
