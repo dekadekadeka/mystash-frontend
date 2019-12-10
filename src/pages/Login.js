@@ -1,5 +1,6 @@
 import React from 'react';
-import { UserContext } from '../App';
+import { Redirect } from 'react-router-dom'
+import { UserContext } from '../UserProvider';
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
@@ -63,11 +64,15 @@ const Login = () => {
         })
     }
 
+    if (data.isSubmitting) {
+        return <Redirect to="./stash" />;
+    }
+
     return (
         <div className="form-margin">
         <div className="flexGrow: 1">
+        Welcome to <h1>myStash</h1>, where all your dreams come true!
         <h1>Login</h1>
-        {/* {this.props.redirect} */}
     <form onSubmit={handleSubmit}>
         <Grid container spacing={5}>
         <Grid item xs={12} md={6}>
@@ -106,7 +111,6 @@ const Login = () => {
         }
             </Grid>
             <Grid container justify="center">
-                {/* <input type='submit' className="ui blue basic button"/> */}
                 <Button
                 input type="submit"
                 disabled={data.isSubmitting}>
