@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { UserContext } from '../UserProvider'
 import Pattern from '../components/Pattern'
 import Yarn from '../components/Yarn'
@@ -7,7 +7,7 @@ import Notion from '../components/Notion'
 
 const initialState = {
     user: {},
-    loading: false,
+    loading: true,
     hasError: false,
 };
 
@@ -39,7 +39,6 @@ const reducer = (state, action) => {
 const Stash = () => {
     const { state: userState } = React.useContext(UserContext)
     const [state, dispatch] = React.useReducer(reducer, initialState)
-
     useEffect(() => {
         dispatch({
             type: 'FETCH_STASH_REQUEST'
@@ -57,7 +56,6 @@ const Stash = () => {
             }
         })
         .then(data => {
-            console.log(data);
             dispatch({
                 type: 'FETCH_STASH_SUCCESS',
                 payload: data
@@ -70,64 +68,49 @@ const Stash = () => {
             })
         })
     }, [userState.token])
-console.log(state)
-    // const [loading, setLoading] = useState(true);
-    // const [patterns, setPatterns] = useState([]);
-    // const [yarns, setYarns] = useState([]);
-    // const [fabrics, setFabrics] = useState([]);
-    // const [notions, setNotions] = useState([]);
-    // const [errorMessage, setErrorMessage] = useState(null);
 
-    // useEffect(() => {
-    //     fetch(STASH_URL)
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //         setPatterns(data.patterns);
-    //         setYarns(data.yarns);
-    //         setFabrics(data.fabrics);
-    //         setNotions(data.notions);
-    //         setLoading(false);
-    //     })
-    // }, [])
-
+console.log(state.user)
     return (
         <div>
+        {state.loading ? (<span className="loader">LOADING...</span>) : 
+        state.hasError ? (<span className="error">AN ERROR HAS OCCURED</span>) : 
+        (<>
             <h1>My Patterns</h1>
-            {/* {state.user.patterns.length === 0 ? 
+            {state.user.user.patterns.length === 0 ? 
             <h2>You don't have any patterns! Add some!</h2> :
+            <div className="stash-grid">
+            {state.loading ? (<span>loading...</span>) : 
+            (state.user.user.patterns.map((pattern) => (
+            <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />))
+            )}
+            </div>}
+            <h1>My Yarns</h1>
+            {state.user.user.yarns.length === 0 ? <h2>You don't have any yarn! Add some!</h2> :
                 <div className="stash-grid">
                 {state.loading ? (<span>loading...</span>) : 
-                (state.user.patterns.map((pattern) => (
-                <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />))
-                )}
-                </div>
-            } */}
-            {/* <h1>My Yarns</h1>
-            {yarns.length === 0 ? <h2>You don't have any yarn! Add some!</h2> :
-                <div className="stash-grid">
-                {loading ? (<span>loading...</span>) : 
-                (yarns.map((yarn) => (
+                (state.user.user.yarns.map((yarn) => (
                 <Yarn key={`${yarn.brand} ${yarn.name}`} yarn={yarn} />))
                 )}
                 </div>
             }
             <h1>My Fabrics</h1>
-            {fabrics.length === 0 ? <h2>You don't have any fabric! Add some!</h2> :
+            {state.user.user.fabrics.length === 0 ? <h2>You don't have any fabric! Add some!</h2> :
                 <div className="stash-grid">
-                {loading ? (<span>loading...</span>) : 
-                (fabrics.map((fabric) => (
+                {state.loading ? (<span>loading...</span>) : 
+                (state.user.user.fabrics.map((fabric) => (
                 <Fabric key={`${fabric.fabric_type} ${fabric.color}`} fabric={fabric} />))
                 )}
                 </div>
             }
             <h1>My Notions</h1>
-            {yarns.length === 0 ? <h2>You don't have any notions! Add some!</h2> :
+            {state.user.user.notions.length === 0 ? <h2>You don't have any notions! Add some!</h2> :
                 <div className="stash-grid">
-                {(notions.map((notion) => (
+                {(state.user.user.notions.map((notion) => (
                 <Notion key={`${notion.brand} ${notion.name}`} notion={notion} />))
                 )}
                 </div>
-            } */}
+            }
+        </>)}
         </div>
     );
 }

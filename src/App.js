@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import List from './pages/List'
 import AllPatterns from './pages/AllPatterns'
 import SinglePattern from './pages/SinglePattern'
+import Stash from './pages/Stash'
 import Error from './pages/Error'
 import './App.css';
 
@@ -12,13 +13,14 @@ import './App.css';
 function App() {
     return (
       <div>
-        <Navbar />
+      <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/list" component={List} />
+          <Route exact path="/stash" component={Stash} />
           <Route exact path="/patterns" component={AllPatterns} />
           <Route exact path="/patterns/:number" component={SinglePattern} />
-          {/* <Route component={Error} /> */}
+          <Route component={Error} />
         </Switch>
       </div>
     );
