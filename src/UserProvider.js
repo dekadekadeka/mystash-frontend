@@ -4,20 +4,19 @@ export const UserContext = React.createContext();
 
 const initialState = {
     isAuthenticated: false,
-    username: null,
+    user: null,
     token: null,
 };
 
-export const reducer = (state, action) => {
+export const reducer = (state = initialState, action) => {
     switch(action.type){
         case "LOGIN":
-            localStorage.setItem("username", JSON.stringify(action.payload.user));
-            localStorage.setItem("token", JSON.stringify(action.payload.token));
+            localStorage.setItem("token", action.payload.jwt);
             return{
                 ...state,
                 isAuthenticated: true,
                 user: action.payload.user,
-                token: action.payload.token
+                token: action.payload.jwt
             };
         case "LOGOUT":
             localStorage.clear();
@@ -32,7 +31,7 @@ export const reducer = (state, action) => {
 }
 
 export function UserProvider({children}){
-const [state, dispatch] = React.useReducer(reducer, initialState);
+    const [state, dispatch] = React.useReducer(reducer, initialState);
 
     return (
         <UserContext.Provider value={{state, dispatch}}>
