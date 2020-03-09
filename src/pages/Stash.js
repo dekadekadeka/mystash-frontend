@@ -75,6 +75,7 @@ console.log(state.user)
         {state.loading ? (<span className="loader">LOADING...</span>) : 
         state.hasError ? (<span className="error">AN ERROR HAS OCCURED</span>) : 
         (<>
+            <h1>Welcome {state.user.user.name}!!</h1>
             <h1>My Patterns</h1>
             {state.user.user.patterns.length === 0 ? 
             <h2>You don't have any patterns! Add some!</h2> :
