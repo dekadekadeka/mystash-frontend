@@ -1,8 +1,11 @@
 import React from 'react';
+import { config } from '../../src/constants';
+
+const url = config.url.apiUrl;
 
 const SinglePattern = ({pattern}) => {
-    const GENERIC_FRONT = "http://localhost:3000/generic_front.jpg"
-    const GENERIC_BACK = "http://localhost:3000/generic_back.jpg"
+    const GENERIC_FRONT = `${url}/generic_front.jpg`
+    const GENERIC_BACK = `${url}/generic_back.jpg`
 
     const frontPic = 
     pattern.front_pic === null ? GENERIC_FRONT : pattern.front_pic

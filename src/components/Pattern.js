@@ -1,4 +1,6 @@
 import React from 'react';
+import { config } from '../../src/constants';
+
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
@@ -13,6 +15,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 
 import SinglePattern from '../pages/SinglePattern'
 
+const url = config.url.apiUrl;
 //fancy red button
 const DeleteButton = withStyles(theme => ({
   root: {
@@ -26,7 +29,7 @@ const DeleteButton = withStyles(theme => ({
 
 //actual function
 const Pattern = ({pattern}) => {
-    const GENERIC_FRONT = "http://localhost:3000/generic_front.jpg"
+    const GENERIC_FRONT = `${url}/generic_front.jpg`
 
     const frontPic = 
     pattern.front_pic === null ? GENERIC_FRONT : pattern.front_pic

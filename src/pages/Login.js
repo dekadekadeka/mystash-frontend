@@ -1,12 +1,16 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom'
 import { UserContext } from '../UserProvider';
+import { config } from '../../src/constants';
+
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 
+const url = config.url.apiUrl;
+
 const Login = () => {
-    const { dispatch } = React.useContext(UserContext);
+    // const { dispatch } = React.useContext(UserContext);
     const initialState = {
         username: "",
         password: "",
@@ -49,12 +53,12 @@ const Login = () => {
             }
             throw resp;
         })
-        .then(respJson => {
-            dispatch({
-                type: "LOGIN",
-                payload: respJson
-            })
-        })
+        // .then(respJson => {
+        //     dispatch({
+        //         type: "LOGIN",
+        //         payload: respJson
+        //     })
+        // })
         .catch(error => {
             setData({
                 ...data,

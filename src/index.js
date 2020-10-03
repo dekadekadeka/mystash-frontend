@@ -3,15 +3,16 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import {BrowserRouter as Router} from 'react-router-dom';
 import App from './App';
-import { UserProvider } from './UserProvider'
+// import { UserProvider } from './UserProvider'
+import Provider from './Provider';
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <UserProvider>
+    <Provider>
         <Router>
             <App />
         </Router>
-    </UserProvider>
+    </Provider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
