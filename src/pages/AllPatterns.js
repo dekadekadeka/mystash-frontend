@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import { useQuery, gql } from '@apollo/client';
 import Pattern from '../components/Pattern'
 import Search from '../components/Search'
 
-// TODO: Query from GraphQL instead!
 // const PATTERNS_URL = "http://localhost:3000/patterns"
 const PatternsQuery = gql`
   {
@@ -44,21 +42,18 @@ const Patterns = () => {
     //             setFilteredPatterns(searchResults);
     //         }
     //     };
+    const { loading, error, data } = useQuery(PatternsQuery);
 
-    return (
-      <Query query={PatternsQuery}>
-        {({ data, loading }) => (
-          <div>
-            {loading
-              ? 'loading...'
-              : data.patterns.map(({ brand, id, number }) => (
-                  <div key={id}>
-                    <b>{brand}</b> <p>{number}</p>
-                  </div>
-                ))}
-          </div>
-        )}
-      </Query>
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>Error :(</p>;
+
+    return data.patterns.map(({ id, brand, number }) => (
+      <div key={id}>
+        <p>
+          {brand}: {number}
+        </p>
+      </div>
+    ));
         // <div>
         //     <Search search={search}/>
         //     {filteredPatterns.length === 0 ? 
@@ -74,7 +69,6 @@ const Patterns = () => {
         //         </div>
         //     }
         // </div>
-    );
 }
 
 export default Patterns;
