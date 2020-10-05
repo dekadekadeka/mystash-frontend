@@ -47,41 +47,40 @@ const Login = () => {
   }
   return (
     <div className="form-margin">
-      <div className="flexGrow: 1">
-        Welcome to <h1>myStash</h1>, where all your dreams come true!
-        <h1>Login</h1>
-          <form onSubmit={handleSubmit}>
-            <Grid container spacing={5}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  label="Username" 
-                  name='username'
-                  onChange={e => setUsername(e.target.value)}
-                  fullWidth
-                  margin="normal"
-                />
-              </Grid>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  label="Password" 
-                  type="password"
-                  name="password"
-                  onChange={e => setPassword(e.target.value)}
-                  fullWidth
-                  margin="normal"
-                />
-              </Grid>
-              <Grid container justify="center">
-                <Button
-                  input
-                  type="submit"
-                >
-                  Sign In
-                </Button>
-              </Grid>
-            </Grid>
-          </form>
+      <div className="title">
+        Welcome to <span className="emphasis">myStash</span>, where all your dreams come true!
       </div>
+      <h1>Login</h1>
+        <form onSubmit={handleSubmit}>
+          <Grid container spacing={5}>
+            <Grid item xs={12} md={6}>
+              <TextField
+                label="Username" 
+                name='username'
+                onChange={e => setUsername(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+            <Grid item xs={12} md={6}>
+              <TextField
+                label="Password" 
+                type="password"
+                name="password"
+                onChange={e => setPassword(e.target.value)}
+                fullWidth
+                margin="normal"
+              />
+            </Grid>
+            <Grid container justify="center">
+              <Button
+                type="submit"
+              >
+                Sign In
+              </Button>
+            </Grid>
+          </Grid>
+        </form>
     </div>
   );
 }

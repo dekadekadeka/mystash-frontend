@@ -10,13 +10,13 @@ import { UserProvider } from './UserProvider'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <UserProvider>
+  <UserProvider>
+    <ApolloProvider client={client}>
       <Router>
         <App />
       </Router>
-    </UserProvider>
-  </ApolloProvider>
+    </ApolloProvider>
+  </UserProvider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
