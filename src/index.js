@@ -6,15 +6,17 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from '../src/apollo';
 
 import App from './App';
-// import { UserProvider } from './UserProvider'
+import { UserProvider } from './UserProvider'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(
-    <ApolloProvider client={client}>
-        <Router>
-            <App />
-        </Router>
-    </ApolloProvider>
+  <ApolloProvider client={client}>
+    <UserProvider>
+      <Router>
+        <App />
+      </Router>
+    </UserProvider>
+  </ApolloProvider>
 , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

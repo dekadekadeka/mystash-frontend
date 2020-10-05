@@ -1,7 +1,0 @@
-query PatternsQuery {
-  patterns {
-    id
-    brand
-    number
-  }
-}
