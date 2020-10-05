@@ -1,4 +1,6 @@
 import React from 'react';
+import { config } from '../../src/constants';
+
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,6 +9,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button'
 import { withStyles } from '@material-ui/core/styles';
 import { red } from '@material-ui/core/colors';
+
+const url = config.url.apiUrl;
 
 const DeleteButton = withStyles(theme => ({
   root: {
@@ -20,7 +24,7 @@ const DeleteButton = withStyles(theme => ({
 
 
 const Fabric = ({fabric}) => {
-    const GENERIC_FRONT = "http://localhost:3000/generic_fabric.jpg"
+    const GENERIC_FRONT = `${url}/generic_fabric.jpg`
 
     const pic = 
     fabric.pic === null ? GENERIC_FRONT : fabric.pic

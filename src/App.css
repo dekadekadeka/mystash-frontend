@@ -11,9 +11,22 @@ h1{
   margin: 1.5rem;
 }
 
+.emphasis{
+  font-family: damion, sans-serif;
+  font-size: 40px;
+  margin: 0px 10px;
+}
+
+/* login */
+.title{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
 /* navbar */
 .navbar{
-  background-image: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+  background-image: linear-gradient(to right, #c55a5a 0%, #b47ec4 25%, #7b7cd3 50%, #67bdb5 75%, #7fbd7f 100%);
   height: 4rem;
   color: #fff;
   display: grid;
