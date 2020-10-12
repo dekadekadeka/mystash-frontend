@@ -6,7 +6,7 @@ import { ApolloProvider } from '@apollo/client';
 import { client } from '../src/apollo';
 
 import App from './App';
-import { UserProvider } from './UserProvider'
+import { UserProvider } from './context'
 import * as serviceWorker from './serviceWorker';
 
 ReactDOM.render(

@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
-import { UserContext } from '../UserProvider';
-import { gql, useMutation } from '@apollo/client';
+import { loginUser, useAuthState, useAuthDispatch } from '../context';
+import { useMutation } from '@apollo/client';
+import { SIGN_IN_USER } from '../mutations/SignInUserMutation';
 
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
 import { Button } from '@material-ui/core';
 
-const SIGN_IN_USER = gql`
-  mutation SignInUser($input: AuthProviderCredentialsInput!) {
-      signinUser(input: $input) {
-      user {
-        id
-        name
-      }
-      token
-    }
-  }
-`;
-
 const Login = () => {
-    const { dispatch } = React.useContext(UserContext);
+    const dispatch = useAuthDispatch();
+    const { loading, errorMessage } = useAuthState();
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -36,10 +26,7 @@ const Login = () => {
         }
       })
       .then(data => {
-            dispatch({
-                type: "LOGIN",
-                payload: data
-            })
+        loginUser(dispatch, data)
         })
     }
   if (localStorage.token) {
