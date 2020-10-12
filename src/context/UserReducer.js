@@ -1,4 +1,4 @@
-let token = localStorage.getItem("token") ? JSON.parse(localStorage.getItem("token")) : '';
+let token = localStorage.getItem("token") ? localStorage.getItem("token") : '';
 
 export const initialState = {
   errorMessage: null,
@@ -15,7 +15,7 @@ export const UserReducer = (state = initialState, action) => {
         loading: true,
       }
     case "LOGIN_SUCCESS":
-      localStorage.setItem("token", JSON.stringify(action.payload.data.signinUser.token));
+      localStorage.setItem("token", action.payload.data.signinUser.token);
       return{
           ...state,
           user: action.payload.data.signinUser.user,
