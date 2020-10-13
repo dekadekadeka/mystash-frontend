@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router-dom'
+import { Router, Redirect } from 'react-router-dom'
 import { loginUser, useAuthState, useAuthDispatch } from '../context';
 import { useMutation } from '@apollo/client';
 import { SIGN_IN_USER } from '../mutations/SignInUserMutation';
@@ -10,7 +10,7 @@ import { Button } from '@material-ui/core';
 
 const Login = () => {
     const dispatch = useAuthDispatch();
-    const { loading, errorMessage } = useAuthState();
+    // const { loading, errorMessage } = useAuthState();
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
 
