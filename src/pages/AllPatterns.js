@@ -1,74 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useCallback, useState } from 'react';
 import { useQuery, gql } from '@apollo/client';
-import Pattern from '../components/Pattern'
-import Search from '../components/Search'
 
-// const PATTERNS_URL = "http://localhost:3000/patterns"
+import Grid from '@material-ui/core/Grid';
+
+import Search from '../components/Search'
+import PatternContainer from '../components/PatternContainer';
+
 const PatternsQuery = gql`
-  {
-    patterns {
-      id
-      brand
-      number
+  query Patterns($search: SearchInput) {
+    patterns(search: $search) {
+      __typename
+      count
+      records {
+        __typename
+        id
+        brand
+        number
+        patternBackPic
+        patternFrontPic
+      }
     }
   }
 `;
 
 const Patterns = () => {
-    // const [baseline, setBaseline] = useState(true);
-    // const [patterns, setPatterns] = useState([]);
-    // const [filteredPatterns, setFilteredPatterns] = useState([])
+  const [searchValue, setSearchValue] = useState(null);
 
-    // useEffect(() => {
-    //     fetch(PATTERNS_URL)
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //         setPatterns(data);
-    //         setFilteredPatterns(data);
-    //         setBaseline(false);
-    //     })
-    // }, [])
+  const handleSearchValue = useCallback((term) => {
+    setSearchValue(term);
+  }, [setSearchValue]);
 
-    // const search = searchValue => {
-    //     setBaseline(true);
+  const searchInput = {};
+  if (searchValue) {
+    searchInput.searchTerm = searchValue[0].toUpperCase() + searchValue.substr(1);
+  }
 
-    //     let searchResults = patterns;
+  const variables = {
+    search: searchInput,
+  };
 
-    //     if(searchValue){
-    //         searchResults = searchResults.filter(p => 
-    //             p.brand.toLowerCase().includes(searchValue.toLowerCase()) || 
-    //             p.number.includes(searchValue))
-    //             setBaseline(false);
-    //             setFilteredPatterns(searchResults);
-    //         }
-    //     };
-    const { loading, error, data } = useQuery(PatternsQuery);
+  const { loading, error, data } = useQuery(PatternsQuery, {
+    variables: variables,
+  });
 
-    if (loading) return <p>Loading...</p>;
-    if (error) return <p>Error :(</p>;
-
-    return data.patterns.map(({ id, brand, number }) => (
-      <div key={id}>
-        <p>
-          {brand}: {number}
-        </p>
-      </div>
-    ));
-        // <div>
-        //     <Search search={search}/>
-        //     {filteredPatterns.length === 0 ? 
-        //     <h2>No patterns have matched your search!</h2> :
-        //         <div className="stash-grid">
-        //         {baseline ? 
-        //         (patterns.map((pattern) => (
-        //             <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />))
-        //         ) : 
-        //         (filteredPatterns.map((pattern) => (
-        //         <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />))
-        //         )}
-        //         </div>
-        //     }
-        // </div>
+  return (
+    <div className="container">
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Search handleSearchValue={handleSearchValue} searchValue={searchValue} />
+        </Grid>
+        <PatternContainer
+          error={error}
+          loading={loading}
+          data={data}
+        />
+      </Grid>
+    </div>
+  )
 }
 
 export default Patterns;

@@ -11,14 +11,13 @@ import Yarn from '../components/Yarn'
 
 
 const Stash = () => {
-
   const { loading, error, data } = useQuery(CURRENT_USER);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error}`;
   const { currentUser } = data;
 
   return (
-    <React.Fragment>
+    <div className="container">
       <h1>Welcome {currentUser.name}!!</h1>
         {currentUser.patterns.length > 0 && (
           <React.Fragment>
@@ -58,7 +57,7 @@ const Stash = () => {
             </div>
           </React.Fragment>
         )}
-    </React.Fragment>
+    </div>
   );
 }
 
