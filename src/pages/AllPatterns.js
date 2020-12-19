@@ -24,7 +24,7 @@ const PatternsQuery = gql`
 `;
 
 const Patterns = () => {
-  const [searchValue, setSearchValue] = useState(null);
+  const [searchValue, setSearchValue] = useState();
 
   const handleSearchValue = useCallback((term) => {
     setSearchValue(term);
