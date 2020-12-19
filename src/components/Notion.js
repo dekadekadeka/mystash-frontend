@@ -4,18 +4,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button'
-import { withStyles } from '@material-ui/core/styles';
-import { red } from '@material-ui/core/colors';
-
-const DeleteButton = withStyles(theme => ({
-  root: {
-    color: theme.palette.getContrastText(red[500]),
-    backgroundColor: red[500],
-    '&:hover': {
-      backgroundColor: red[700],
-    },
-  },
-}))(Button);
+import DeleteButton from '../fancycomponents/DeleteButton';
 
 const Notion = ({notion}) => {
     return (
@@ -31,7 +20,7 @@ const Notion = ({notion}) => {
         <Button size="small" color="primary">
           Edit
         </Button>
-        <DeleteButton size="small" color="primary" className={DeleteButton.root}>
+        <DeleteButton size="small">
           Delete
         </DeleteButton>
       </CardActions>
