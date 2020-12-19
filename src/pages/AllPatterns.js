@@ -24,7 +24,7 @@ const PatternsQuery = gql`
 `;
 
 const Patterns = () => {
-  const [searchValue, setSearchValue] = useState();
+  const [searchValue, setSearchValue] = useState("");
 
   const handleSearchValue = useCallback((term) => {
     setSearchValue(term);
@@ -32,7 +32,7 @@ const Patterns = () => {
 
   const searchInput = {};
   if (searchValue) {
-    searchInput.searchTerm = searchValue[0].toUpperCase() + searchValue.substr(1);
+    searchInput.searchTerm = searchValue;
   }
 
   const variables = {
@@ -46,9 +46,7 @@ const Patterns = () => {
   return (
     <div className="container">
       <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Search handleSearchValue={handleSearchValue} searchValue={searchValue} />
-        </Grid>
+        <Search handleSearchValue={handleSearchValue} searchValue={searchValue} />
         <PatternContainer
           error={error}
           loading={loading}

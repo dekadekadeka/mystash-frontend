@@ -1,6 +1,7 @@
 import React, { useCallback } from 'react';
 
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
 const Search = ({ handleSearchValue, searchValue }) => {
@@ -9,12 +10,10 @@ const Search = ({ handleSearchValue, searchValue }) => {
   }, [handleSearchValue]);
 
   const handleBrandChange = (e, v) => {
-    handleSearchValue(v.value)
-    console.log(e, v);
+    handleSearchValue(v === null ? "" : v.brand)
   }
 
   const patternBrands = [
-    {brand: "All Brands", value: null},
     {brand: "Simplicity", value: "0"},
     {brand: "McCalls", value: "1"},
     {brand: "Butterick", value: "2"},
@@ -26,20 +25,24 @@ const Search = ({ handleSearchValue, searchValue }) => {
   ]
 
   return (
-    <form style={{'textAlign': 'center'}}>
-      <Autocomplete
-        options={patternBrands}
-        getOptionLabel={(option) => option.brand}
-        onChange={(e, v) => handleBrandChange(e, v)}
-        renderInput={(params) => <TextField {...params} label="Search By Brand" variant="outlined" />}
-        style={{ width: 300 }}
-      />
-      <TextField
-        value={searchValue}
-        label="Search By Number"
-        onChange={handleChange}
-      />
-    </form>
+    <Grid container spacing={4} style={{ margin: '0px 16px' }}>
+      <Grid item xs={12} md={6}>
+        <Autocomplete
+          getOptionLabel={(option) => option.brand}
+          getOptionSelected={(option) => option.brand}
+          onChange={(e, v) => handleBrandChange(e, v)}
+          options={patternBrands}
+          renderInput={(params) => <TextField {...params} label="Search By Brand" />}
+        />
+      </Grid>
+      <Grid item xs={12} md={6}>
+        <TextField
+          fullWidth
+          label="Search By Number"
+          onChange={handleChange}
+        />
+      </Grid>
+    </Grid>
   );
 }
 
