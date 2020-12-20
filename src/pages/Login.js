@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom'
 import { loginUser, useAuthState, useAuthDispatch } from '../context';
 import { useMutation } from '@apollo/client';
-import { SIGN_IN_USER } from '../mutations/SignInUserMutation';
+import SignInUserMutation from '../mutations/SignInUserMutation.gql';
 
 import TextField from '@material-ui/core/TextField';
 import Grid from '@material-ui/core/Grid';
@@ -14,7 +14,7 @@ const Login = () => {
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
 
-    const [signinUser] = useMutation(SIGN_IN_USER);
+    const [signinUser] = useMutation(SignInUserMutation);
   
     const handleSubmit = e => {
       e.preventDefault();
