@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
-import { CURRENT_USER } from '../queries/CurrentUserQuery';
+import CurrentUserQuery from '../queries/CurrentUserQuery.gql';
 
 import Fabric from '../components/Fabric'
 // import Floss from '../components/Floss'
@@ -11,7 +11,7 @@ import Yarn from '../components/Yarn'
 
 
 const Stash = () => {
-  const { loading, error, data } = useQuery(CURRENT_USER);
+  const { loading, error, data } = useQuery(CurrentUserQuery);
   if (loading) return 'Loading...';
   if (error) return `Error! ${error}`;
   const { currentUser } = data;

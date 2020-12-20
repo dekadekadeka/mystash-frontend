@@ -1,27 +1,11 @@
 import React, { useCallback, useState } from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
+
+import PatternsQuery from '../queries/PatternsQuery.gql';
 
 import Grid from '@material-ui/core/Grid';
-
-import Search from '../components/Search'
 import PatternContainer from '../components/PatternContainer';
-
-const PatternsQuery = gql`
-  query Patterns($search: SearchInput) {
-    patterns(search: $search) {
-      __typename
-      count
-      records {
-        __typename
-        id
-        brand
-        number
-        patternBackPic
-        patternFrontPic
-      }
-    }
-  }
-`;
+import Search from '../components/Search'
 
 const Patterns = () => {
   const [searchValue, setSearchValue] = useState("");
