@@ -30,7 +30,7 @@ const Patterns = () => {
   return (
     <div className="container">
       <Grid container spacing={3}>
-        <Search handleSearchValue={handleSearchValue} searchValue={searchValue} />
+        <Search handleSearchValue={handleSearchValue} />
         <PatternContainer
           error={error}
           loading={loading}

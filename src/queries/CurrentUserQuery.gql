@@ -11,7 +11,7 @@ query CurrentUser {
       size
       description
       name
-      pic
+      fabricPic
     }
     flosses {
       __typename
@@ -19,6 +19,7 @@ query CurrentUser {
       brand
       color
       amount
+      flossPic
     }
     needles {
       __typename
@@ -34,6 +35,7 @@ query CurrentUser {
       size
       description
       color
+      notionPic
     }
     patterns {
       __typename
@@ -41,11 +43,12 @@ query CurrentUser {
       brand
       number
       patternFrontPic
+      patternBackPic
     }
     yarns {
       __typename
       id
-      pic
+      yarnPic
       brand
       name
       lot

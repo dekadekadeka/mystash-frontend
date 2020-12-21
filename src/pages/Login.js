@@ -10,7 +10,7 @@ import { Button } from '@material-ui/core';
 
 const Login = () => {
     const dispatch = useAuthDispatch();
-    // const { loading, errorMessage } = useAuthState();
+    const { loading, errorMessage } = useAuthState();
     const [username, setUsername] = useState(null);
     const [password, setPassword] = useState(null);
 
@@ -29,11 +29,12 @@ const Login = () => {
         loginUser(dispatch, data)
         })
     }
-  if (localStorage.token) {
+  if (localStorage.token && !loading) {
     return <Redirect to="./stash" />;
   }
+
   return (
-    <div className="form-margin">
+    <div className="container">
       <div className="title">
         Welcome to <span className="emphasis">myStash</span>, where all your dreams come true!
       </div>
@@ -42,6 +43,8 @@ const Login = () => {
           <Grid container spacing={5}>
             <Grid item xs={12} md={6}>
               <TextField
+                error={errorMessage}
+                helperText={errorMessage ? errorMessage : null}
                 label="Username" 
                 name='username'
                 onChange={e => setUsername(e.target.value)}
@@ -51,6 +54,7 @@ const Login = () => {
             </Grid>
             <Grid item xs={12} md={6}>
               <TextField
+                error={errorMessage}
                 label="Password" 
                 type="password"
                 name="password"

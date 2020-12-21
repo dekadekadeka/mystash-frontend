@@ -2,7 +2,7 @@ import React from 'react';
 
 const List = () => {
     return (
-        <div>
+        <div className="container">
             I am the list. Yay
         </div>
     );

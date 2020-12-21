@@ -11,10 +11,6 @@ h1{
   margin: 5rem 2rem;
 }
 
-.form-margin{
-  margin: 1.5rem;
-}
-
 .emphasis{
   font-family: damion, sans-serif;
   font-size: 40px;
@@ -30,7 +26,8 @@ h1{
 
 /* navbar */
 .navbar{
-  background-image: linear-gradient(to right, #c55a5a 0%, #b47ec4 25%, #7b7cd3 50%, #67bdb5 75%, #7fbd7f 100%);
+  background-image: linear-gradient(transparent, #fff 100%, rgba(255, 255, 255, 0.5) 100%),
+    linear-gradient(to right, #c55a5a 0%, #b47ec4 25%, #7b7cd3 50%, #67bdb5 75%, #7fbd7f 100%);
   color: #fff;
   display: grid;
   grid-template-columns: auto auto auto;
@@ -112,4 +109,12 @@ h1{
   .dialog img{
     width: 50rem;
   }
+}
+
+/* notions */
+.notion-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }
