@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/client';
 import CreatePatternMutation from '../mutations/CreatePatternMutation.gql';
+import PatternsQuery from '../queries/PatternsQuery.gql';
 
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
@@ -22,7 +23,18 @@ const AddPatternModal = () => {
     number: '',
   });
 
-  const [createPattern] = useMutation(CreatePatternMutation);
+  const [createPattern, { error}] = useMutation(CreatePatternMutation, {
+    refetchQueries: () => [{
+      query: PatternsQuery,
+      variables: { search: null },
+    }],
+    onCompleted: () => {
+      handleClose();
+    },
+    onError: (error) => {
+      console.log(error);
+    }
+  });
 
   const handleOpen = () => {
     setOpen(true);
@@ -53,6 +65,8 @@ const AddPatternModal = () => {
           // "patternBackPic": input.patternBackPic,
         }
       }
+    }).catch(error => {
+      console.log(error)
     })
   }
 
@@ -88,6 +102,8 @@ const AddPatternModal = () => {
           </FormControl>
           <TextField
             label="Number"
+            error={error}
+            helperText={error ? error.message : null}
             name="number"
             fullWidth
             value={input.number}

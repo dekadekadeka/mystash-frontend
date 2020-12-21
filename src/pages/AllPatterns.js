@@ -25,6 +25,7 @@ const Patterns = () => {
 
   const { loading, error, data } = useQuery(PatternsQuery, {
     variables: variables,
+    fetchPolicy: 'cache-and-network',
   });
 
   return (
