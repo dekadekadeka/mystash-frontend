@@ -1,10 +1,11 @@
 import React, { useCallback } from 'react';
 
+import AddPatternModal from './AddPatternModal';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
 
-const Search = ({ handleSearchValue, searchValue }) => {
+const Search = ({ handleSearchValue }) => {
   const handleChange = useCallback((e) => {
     handleSearchValue(e.target.value);
   }, [handleSearchValue]);
@@ -25,8 +26,8 @@ const Search = ({ handleSearchValue, searchValue }) => {
   ]
 
   return (
-    <Grid container spacing={4} style={{ margin: '0px 16px' }}>
-      <Grid item xs={12} md={6}>
+    <Grid container spacing={4} style={{ margin: '0px 16px' }} alignItems="flex-end">
+      <Grid item xs={12} md={4}>
         <Autocomplete
           getOptionLabel={(option) => option.brand}
           getOptionSelected={(option) => option.brand}
@@ -35,7 +36,10 @@ const Search = ({ handleSearchValue, searchValue }) => {
           renderInput={(params) => <TextField {...params} label="Search By Brand" />}
         />
       </Grid>
-      <Grid item xs={12} md={6}>
+      <Grid item xs={12} md={4}>
+        <AddPatternModal />
+      </Grid>
+      <Grid item xs={12} md={4}>
         <TextField
           fullWidth
           label="Search By Number"

@@ -16,7 +16,6 @@ import SinglePattern from '../pages/SinglePattern'
 
 const url = config.url.apiUrl;
 
-//actual function
 const Pattern = ({ pattern }) => {
     //open full pattern modal
     const [open, setOpen] = React.useState(false);
@@ -31,15 +30,6 @@ const Pattern = ({ pattern }) => {
       setOpen(false);
     }
 
-    const descriptionElementRef = React.useRef(null);
-    React.useEffect(() => {
-      if (open) {
-        const { current: descriptionElement } = descriptionElementRef;
-        if (descriptionElement !== null) {
-          descriptionElement.focus();
-        }
-      }
-    }, [open]);
     //add to stash function
     //delete from stash function
     return (

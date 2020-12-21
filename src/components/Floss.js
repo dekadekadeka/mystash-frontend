@@ -11,23 +11,22 @@ import DeleteButton from '../fancycomponents/DeleteButton';
 
 const url = config.url.apiUrl;
 
-const Fabric = ({ fabric }) => {
+const Floss = ({ floss }) => {
   return (
     <Card>
       <CardActionArea>
-        {fabric.fabricPic && (
+        {floss.flossPic && (
           <CardMedia
             component="img"
-            image={`${url}/${fabric.fabricPic}`}
+            image={`${url}/${floss.flossPic}`}
             height="200"
-            alt={fabric.name}
+            alt={floss.name}
           />
         )}
         <CardContent>
-          <h2>{fabric.name}</h2>
-          <h2>{fabric.fabricType}, {fabric.color}</h2>
-          <h3>Amount: {fabric.size}</h3>
-          <p>{fabric.description}</p>
+          <h2>{floss.brand}</h2>
+          <h3>Amount: {floss.amount}</h3>
+          <h3>Color: {floss.color}</h3>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -42,4 +41,4 @@ const Fabric = ({ fabric }) => {
   );
 }
 
-export default Fabric;
+export default Floss;

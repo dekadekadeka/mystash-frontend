@@ -11,21 +11,18 @@ import DeleteButton from '../fancycomponents/DeleteButton';
 
 const url = config.url.apiUrl;
 
-const Yarn = ({yarn}) => {
-    const GENERIC_FRONT = `${url}/generic_yarn.jpg`
-
-    const pic = 
-    yarn.pic === null ? GENERIC_FRONT : yarn.pic
-
-    return (
-        <Card>
+const Yarn = ({ yarn }) => {
+  return (
+    <Card>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          image={pic}
-          height="200"
-          alt={yarn.name}
-        />
+        {yarn.yarnPic && (
+          <CardMedia
+            component="img"
+            image={`${url}/${yarn.yarnPic}`}
+            height="200"
+            alt={yarn.name}
+          />
+        )}
         <CardContent>
             <h2>{yarn.brand} {yarn.name}</h2>
             <h3>{yarn.color} Size: {yarn.size} Lot: {yarn.lot}</h3>
@@ -40,7 +37,7 @@ const Yarn = ({yarn}) => {
         </DeleteButton>
       </CardActions>
     </Card>
-    );
+  );
 }
 
 export default Yarn;

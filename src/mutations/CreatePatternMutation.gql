@@ -1,0 +1,10 @@
+mutation CreatePattern($patternInput: PatternInput!) {
+  createPattern(patternInput: $patternInput) {
+    __typename
+    id
+    brand
+    number
+    frontPic
+    backPic
+  }
+}
