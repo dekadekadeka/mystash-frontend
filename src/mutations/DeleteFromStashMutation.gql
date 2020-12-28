@@ -1,0 +1,6 @@
+mutation DeleteFromStash($patternId: ID!) {
+  deleteFromStash(patternId: $patternId){
+      __typename
+      id
+  }
+}

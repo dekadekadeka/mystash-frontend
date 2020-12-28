@@ -1,0 +1,10 @@
+mutation UpdatePattern($id: ID!, $patternInput: PatternInput!) {
+  updatePattern(id: $id, patternInput: $patternInput) {
+    __typename
+    id
+    brand
+    number
+    frontPic
+    backPic
+  }
+}

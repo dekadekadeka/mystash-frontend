@@ -17,7 +17,10 @@ const PatternContainer = ({ error, loading, data }) => {
     <React.Fragment>
       {data.patterns.records.map(( pattern ) => (
         <Grid item xs={12} md={6} lg={3}>
-          <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />
+          <Pattern
+            key={`${pattern.brand} ${pattern.number}`}
+            pattern={pattern}
+            />
         </Grid>
       ))}
     </React.Fragment>
