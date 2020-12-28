@@ -1,6 +1,8 @@
 import React, { useCallback } from 'react';
 
-import AddPatternModal from './AddPatternModal';
+import CreatePatternMutation from '../mutations/CreatePatternMutation.gql';
+
+import PatternFormModal from './PatternFormModal';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Grid from '@material-ui/core/Grid';
 import TextField from '@material-ui/core/TextField';
@@ -37,7 +39,12 @@ const Search = ({ handleSearchValue }) => {
         />
       </Grid>
       <Grid item xs={12} md={4}>
-        <AddPatternModal />
+        <PatternFormModal
+          title="Add A Pattern"
+          fullWidth
+          path="add"
+          mutation={CreatePatternMutation}
+        />
       </Grid>
       <Grid item xs={12} md={4}>
         <TextField

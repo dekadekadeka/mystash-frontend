@@ -13,7 +13,9 @@ import Yarn from '../components/Yarn'
 
 
 const Stash = () => {
-  const { loading, error, data } = useQuery(CurrentUserQuery);
+  const { loading, error, data } = useQuery(CurrentUserQuery, {
+    fetchPolicy: 'cache-and-network',
+  });
   if (loading) return 'Loading...';
   if (error) return `Error! ${error}`;
   const { currentUser } = data;
@@ -27,7 +29,11 @@ const Stash = () => {
           <Grid container>
             {currentUser.patterns.map((pattern) => (
               <Grid item xs={12} sm={6} lg={3}>
-                <Pattern key={`${pattern.brand} ${pattern.number}`} pattern={pattern} />
+                <Pattern
+                  key={`${pattern.brand} ${pattern.number}`}
+                  pattern={pattern}
+                  path="stash"
+                />
               </Grid>
             ))}
           </Grid>

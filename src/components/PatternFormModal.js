@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { useMutation } from '@apollo/client';
-import CreatePatternMutation from '../mutations/CreatePatternMutation.gql';
 import PatternsQuery from '../queries/PatternsQuery.gql';
 
 import Button from '@material-ui/core/Button';
@@ -16,14 +15,14 @@ import MenuItem from '@material-ui/core/MenuItem';
 import Select from '@material-ui/core/Select';
 import TextField from '@material-ui/core/TextField';
 
-const AddPatternModal = () => {
+const PatternFormModal = ({ title, fullWidth, path, mutation, patternId }) => {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState({
     brand: '',
     number: '',
   });
 
-  const [createPattern, { error}] = useMutation(CreatePatternMutation, {
+  const [createPattern, { error }] = useMutation(mutation, {
     refetchQueries: () => [{
       query: PatternsQuery,
       variables: { search: null },
@@ -58,6 +57,7 @@ const AddPatternModal = () => {
   const handleSubmit = e => {
     e.preventDefault();
       createPattern({ variables: {
+        "id": patternId,
         "patternInput": {
           "brand": input.brand,
           "number": input.number,
@@ -72,15 +72,22 @@ const AddPatternModal = () => {
 
   return (
     <React.Fragment>
-      <Button variant="outlined" color="primary" onClick={handleOpen} fullWidth>
-        {'Add A Pattern'}
+      <Button variant="outlined" color="primary" onClick={handleOpen} fullWidth={fullWidth}>
+        {title}
       </Button>
       <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
-        <DialogTitle id="form-dialog-title">Add A Pattern</DialogTitle>
+        <DialogTitle id="form-dialog-title">{`${path === 'add' ? 'Add' : 'Edit'} A Pattern`}</DialogTitle>
         <form onSubmit={handleSubmit}>
         <DialogContent>
           <DialogContentText>
-            {'Add a pattern to the myStash database!'}
+            {path === 'add' ? 
+              'Add a pattern to the myStash database!' :
+              <React.Fragment>
+                {'Edit a pattern in case you made a mistake or want to add a pic.'}
+                  <br />
+                {'Please note this affects the pattern for EVERY user!'}
+              </React.Fragment>
+            }
           </DialogContentText>
           <FormControl style={{ width: '100%' }}>
             <InputLabel>Pattern Brand</InputLabel>
@@ -115,7 +122,7 @@ const AddPatternModal = () => {
             {'Cancel'}
           </Button>
           <Button type="submit" color="primary">
-            {'Add Pattern'}
+            {`${path === 'add' ? 'Add' : 'Edit'} Pattern`}
           </Button>
         </DialogActions>
         </form>
@@ -124,4 +131,4 @@ const AddPatternModal = () => {
   );
 }
 
-export default AddPatternModal;
+export default PatternFormModal;

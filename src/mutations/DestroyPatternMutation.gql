@@ -1,0 +1,8 @@
+mutation DestroyPattern($id: ID!) {
+  destroyPattern(id: $id){
+      __typename
+      id
+      brand
+      number
+  }
+}
