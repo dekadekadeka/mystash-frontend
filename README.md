@@ -1,68 +1,39 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# README
 
-## Available Scripts
+myStash Frontend!
 
-In the project directory, you can run:
+React version 16.14.0
 
-### `npm start`
+Apart from coding, I love crafting. Sewing, crochet, and knitting, to be more specific. 
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+While it is very easy to keep track of which patterns you want to buy that day (do it the way people have for around 100 years, write it down on a piece of paper at the pattern books table, or put it in the "Notes" app of your phone) it is rather difficult to know which patterns you already own, especially if you own dozens of them like me. There have been many times I have found myself shopping for patterns and wondering if I already have one I am looking at. Taking pictures of each one and scrolling through my phone every time I think "I may already have this" is not only tedious, it takes up valuable space on the phone and if scrolling too quickly, it makes a pattern easy to miss as some look very similar. I thought if I had an app where I could search exactly through what I already had by just typing in the pattern number I would know very quickly... so I decided to create just that!
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+myStash is an app to track:
 
-### `npm test`
+* Which sewing patterns you own
+* What fabric, yarn, thread, needles, and different notions you own
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Zippers/buttons/etc. are meant to be tracked under "Notions". Adding a "Supplies" model seemed redundant as they would be nearly identical. 
 
-### `npm run build`
+At first I meant to include thread in the "Notions" model, but looking at how much thread the average crafter owns I decided it needed its own model as well. That is how I found out "Thread" is a reserved word on Rails. I am highly assuming that "String" is one as well, so I named the model "Floss". The end user sees the correct terms reflected in the frontend. 
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+A user is currently able to:
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+* Search for patterns by pattern number and/or brand and add to their stash.
+* Delete a pattern from their stash.
+* Add a pattern by brand or number if it doesn't already exist in the database. Pattern instances will be usable by multiple users.
+  * The edit fuction for a pattern can currently be done by any registered user. While this has good intentions (one user may own the pattern but have a very raggedy envelope and thefore not want to upload a pic, yet still want to add the pattern to the DB/stash), it has the potential to be misused. Without having different user levels or a vetting system, everyone is on the honor system.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Todo:
+* Users will be able to upload pictures of the front and back of a pattern. 
+* Full CRUD is only currently available for the pattern model. Other models will soon have this functionality.
 
-### `npm run eject`
+Specific to one user only:
+* Add fabric and upload a pic to create a "swatch".
+* Add yarn and upload a pic to create a "swatch". As the yarn model also allows for (optional) lot number, this is user-specific.
+  * Lot numbers are strings in order to accomodate dashes and possible alphanumeric lot numbers.
+* Add notions they already own (needles, scissors, etc). Because a model with only thread, zippers, buttons, etc. would be too similar, I decided to have the user incorporate those items under the "Notions" model as well. There will be a field to specify color and size for that reason.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+### "Why can I add a pattern to my stash multiple times? That's a bug!!"
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+No, it isn't. This is a feature. If you have bought patterns long enough, you will at some point in your life have bought duplicates by mistake (the whole idea that inspired this app). You may have bought duplicates on purpose to own different sizes. Your stash can have multiple copies of the same pattern, but the database itself can only accept a pattern with the same number once. Unfortunately, if you happen to delete one of these duplicates from your stash, it will delete all instances of it because it deletes by ID. 
