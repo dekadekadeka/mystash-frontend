@@ -1,0 +1,120 @@
+/* globals */
+body{
+  font-family: 'Roboto', sans-serif;
+}
+
+h1{
+  font-family: damion, sans-serif;
+}
+
+.container {
+  margin: 5rem 2rem;
+}
+
+.emphasis{
+  font-family: damion, sans-serif;
+  font-size: 40px;
+  margin: 0px 10px;
+}
+
+/* login */
+.title{
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+
+/* navbar */
+.navbar{
+  background-image: linear-gradient(transparent, #fff 100%, rgba(255, 255, 255, 0.5) 100%),
+    linear-gradient(to right, #c55a5a 0%, #b47ec4 25%, #7b7cd3 50%, #67bdb5 75%, #7fbd7f 100%);
+  color: #fff;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  height: 4rem;
+  justify-content: space-evenly;
+  line-height: 1;
+  position: fixed;
+  text-shadow: 2px 2px 2px #000;
+  top: 0;
+  width: 100%;
+  z-index: 10;
+}
+
+.navbar h1{
+  font-size: 3rem;
+  margin-top: 0;
+}
+
+.navbar a{
+  text-decoration: none;
+  color: #fff;
+  font-weight: bold;
+}
+
+/* stash */
+.stash-grid{
+  margin: 1rem 2rem 1rem 2rem;
+  display: grid;
+  grid-template-columns: auto;
+  gap: 1rem 1rem;
+  justify-content: space-evenly;
+}
+
+@media only screen and (min-width: 600px) {
+  .stash-grid{
+    margin: 1rem 2rem 1rem 2rem;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 1rem 1rem;
+    justify-content: space-evenly;
+  }
+}
+
+@media screen and (min-width: 900px){
+  .stash-grid{
+    margin: 1rem 0 1rem 2rem;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    gap: 1rem 1rem;
+    justify-content: space-evenly;
+  }
+}
+
+/* single pattern */
+.dialog{
+  display: grid;
+  grid-template-columns: auto;
+  gap: 1rem 1rem;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.dialog h2{
+  text-align: center;
+  color: #000;
+}
+
+.dialog img{
+  width: 15rem;
+}
+
+@media only screen and (min-width: 600px) {
+  .dialog img{
+    width: 40rem;
+  }
+}
+
+@media screen and (min-width: 900px){
+  .dialog img{
+    width: 50rem;
+  }
+}
+
+/* notions */
+.notion-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}

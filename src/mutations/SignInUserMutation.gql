@@ -1,0 +1,10 @@
+mutation SignInUser($input: AuthProviderCredentialsInput!) {
+    signinUser(input: $input) {
+    user {
+      __typename
+      id
+      name
+    }
+    token
+  }
+}
