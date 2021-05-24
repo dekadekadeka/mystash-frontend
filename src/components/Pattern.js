@@ -1,5 +1,5 @@
 import React from 'react';
-import { config } from '../../src/constants';
+import { config } from '../constants';
 import { useMutation } from '@apollo/client';
 
 import Card from '@material-ui/core/Card';
@@ -16,34 +16,24 @@ import DialogContent from '@material-ui/core/DialogContent';
 import AddToStashMutation from '../mutations/AddToStashMutation.gql';
 import DeleteFromStashMutation from '../mutations/DeleteFromStashMutation.gql';
 import UpdatePatternMutation from '../mutations/UpdatePatternMutation.gql';
-import CurrentUserQuery from '../queries/CurrentUserQuery.gql';
 
 import PatternFormModal from './PatternFormModal';
 import SinglePattern from '../pages/SinglePattern'
 
 const url = config.url.apiUrl;
 
-const Pattern = ({ path, pattern }) => {
+const Pattern = ({ currentUserPatternsQuery, path, pattern }) => {
     //open full pattern modal
     const [open, setOpen] = React.useState(false);
     const [scroll, setScroll] = React.useState('body');
 
-    const [addToStash] = useMutation(AddToStashMutation, {
-      onCompleted: () => {
-        console.log("added!")
-        // TODO: cute animation floating up to confirm add
-      },
-    });
+    const [addToStash] = useMutation(AddToStashMutation);
 
     const [deleteFromStash] = useMutation(DeleteFromStashMutation, {
       refetchQueries: () => [{
-        query: CurrentUserQuery,
+        query: currentUserPatternsQuery,
         variables: { search: null },
       }],
-      onCompleted: () => {
-        console.log("deleted!")
-        // TODO: cute animation floating up to confirm delete, maybe
-      },
     });
 
     const handleClickOpen = scrollType => () => {
@@ -57,17 +47,28 @@ const Pattern = ({ path, pattern }) => {
 
     //add to stash function
     const handleAdd = () => {
-      addToStash({ variables : {
-        "patternId": pattern.id,
-      }})
+      addToStash({
+        variables: {
+          "patternId": pattern.id,
+        }
+       }).then(() => {
+        console.log("added!")
+        // TODO: cute animation floating up to confirm add
+      }).catch(() => {
+        console.log('Sorry, there was an error!');
+      });
     }
 
     //delete from stash function
     const handleDelete = () => {
-      // TODO: cute animation floating up to confirm delete
       deleteFromStash({ variables : {
         "patternId": pattern.id,
-      }})
+      }}).then(() => {
+        console.log("deleted!")
+        // TODO: cute animation floating up to confirm delete
+      }).catch(() => {
+        console.log('Sorry, there was an error!');
+      });
     }
 
     return (
@@ -114,7 +115,7 @@ const Pattern = ({ path, pattern }) => {
               onClick={() => handleDelete()}
             >
               {'Delete'}
-            </DeleteButton> 
+            </DeleteButton>
           </React.Fragment> :
           <Button
             size="small"

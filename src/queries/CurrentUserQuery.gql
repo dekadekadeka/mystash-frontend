@@ -3,6 +3,12 @@ query CurrentUser {
     __typename
     id
     name
+    fabricsCount
+    flossesCount
+    needlesCount
+    notionsCount
+    patternsCount
+    yarnsCount
     fabrics {
       __typename
       id
@@ -36,14 +42,6 @@ query CurrentUser {
       description
       color
       notionPic
-    }
-    patterns {
-      __typename
-      id
-      brand
-      number
-      patternFrontPic
-      patternBackPic
     }
     yarns {
       __typename

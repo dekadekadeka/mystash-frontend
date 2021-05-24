@@ -1,7 +1,8 @@
-mutation AddToStash($patternId: ID!) {
-  addToStash(patternId: $patternId){
+query CurrentUserPatterns {
+  currentUser{
     __typename
     id
+    name
     patterns {
       __typename
       id
