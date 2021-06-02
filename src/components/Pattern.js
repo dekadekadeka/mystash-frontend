@@ -56,8 +56,9 @@ const Pattern = ({ currentUserPatternsQuery, path, pattern }) => {
           "patternId": pattern.id,
         }
        }).then(() => {
-        enqueueSnackbar('Pattern added successfully!', {
+        enqueueSnackbar(<p style={{bottom: '5%', left: '43%', position: 'absolute'}}>Pattern added successfully!</p>, {
           variant: 'success',
+          preventDuplicate: true,
         })
       }).catch(() => {
         enqueueSnackbar('Sorry, there was an error!', {
@@ -71,8 +72,9 @@ const Pattern = ({ currentUserPatternsQuery, path, pattern }) => {
       deleteFromStash({ variables : {
         "patternId": pattern.id,
       }}).then(() => {
-        enqueueSnackbar('Pattern deleted successfully!', {
+        enqueueSnackbar(<p style={{bottom: '5%', left: '43%', position: 'absolute'}}>Pattern deleted successfully!</p>, {
           variant: 'error',
+          preventDuplicate: true,
         })
       }).catch(() => {
         enqueueSnackbar('Sorry, there was an error!', {
