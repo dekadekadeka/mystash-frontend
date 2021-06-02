@@ -1,6 +1,7 @@
 import React from 'react';
 import { config } from '../constants';
 import { useMutation } from '@apollo/client';
+import { useSnackbar } from 'notistack';
 
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -23,12 +24,15 @@ import SinglePattern from '../pages/SinglePattern'
 const url = config.url.apiUrl;
 
 const Pattern = ({ currentUserPatternsQuery, path, pattern }) => {
-    //open full pattern modal
+    // open full pattern modal
     const [open, setOpen] = React.useState(false);
     const [scroll, setScroll] = React.useState('body');
 
-    const [addToStash] = useMutation(AddToStashMutation);
+    // snackbar operations
+    const { enqueueSnackbar } = useSnackbar();
 
+    // mutations
+    const [addToStash] = useMutation(AddToStashMutation);
     const [deleteFromStash] = useMutation(DeleteFromStashMutation, {
       refetchQueries: () => [{
         query: currentUserPatternsQuery,
@@ -52,10 +56,14 @@ const Pattern = ({ currentUserPatternsQuery, path, pattern }) => {
           "patternId": pattern.id,
         }
        }).then(() => {
-        console.log("added!")
-        // TODO: cute animation floating up to confirm add
+        enqueueSnackbar(<p style={{bottom: '5%', left: '43%', position: 'absolute'}}>Pattern added successfully!</p>, {
+          variant: 'success',
+          preventDuplicate: true,
+        })
       }).catch(() => {
-        console.log('Sorry, there was an error!');
+        enqueueSnackbar('Sorry, there was an error!', {
+          variant: 'error',
+        })
       });
     }
 
@@ -64,10 +72,14 @@ const Pattern = ({ currentUserPatternsQuery, path, pattern }) => {
       deleteFromStash({ variables : {
         "patternId": pattern.id,
       }}).then(() => {
-        console.log("deleted!")
-        // TODO: cute animation floating up to confirm delete
+        enqueueSnackbar(<p style={{bottom: '5%', left: '43%', position: 'absolute'}}>Pattern deleted successfully!</p>, {
+          variant: 'error',
+          preventDuplicate: true,
+        })
       }).catch(() => {
-        console.log('Sorry, there was an error!');
+        enqueueSnackbar('Sorry, there was an error!', {
+          variant: 'error',
+        })
       });
     }
 
